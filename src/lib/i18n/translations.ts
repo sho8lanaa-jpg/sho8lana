@@ -1,6 +1,78 @@
 export type Lang = "ar" | "en";
 
-export const translations = {
+export interface TranslationDict {
+  common: { siteName: string };
+  nav: { search: string; favorites: string; history: string };
+  hero: { badge: string; titlePrefix: string; titleHighlight: string; subtitle: string };
+  searchForm: {
+    jobPlaceholder: string;
+    governoratePlaceholder: string;
+    searchButton: string;
+    searching: string;
+  };
+  features: {
+    instantTitle: string;
+    instantDesc: string;
+    nearTitle: string;
+    nearDesc: string;
+    dataTitle: string;
+    dataDesc: string;
+  };
+  footer: { tagline: string };
+  emptyState: {
+    defaultTitle: string;
+    defaultDesc: string;
+    startTitle: string;
+    startDesc: string;
+    noFilterTitle: string;
+    noFilterDesc: string;
+    retry: string;
+  };
+  errorState: { title: string; defaultMessage: string; retry: string };
+  filters: {
+    results: string;
+    minRating: string;
+    all: string;
+    hasWebsite: string;
+    hasPhone: string;
+    sortBy: string;
+    sortRating: string;
+    sortAlphabetical: string;
+  };
+  companyCard: {
+    call: string;
+    website: string;
+    directions: string;
+    addressCopied: string;
+    addressCopyFailed: string;
+    addFavorite: string;
+    removeFavorite: string;
+  };
+  loading: { ariaLabel: string; searching: string };
+  search: {
+    resultsFor: string;
+    cached: string;
+    shareSearch: string;
+    shareCopied: string;
+    shareCopyFailed: string;
+    loadingMore: string;
+    noResultsFor: (job: string, gov: string) => string;
+  };
+  favorites: {
+    title: string;
+    subtitle: string;
+    clearAll: string;
+    emptyTitle: string;
+    emptyDesc: string;
+  };
+  history: { title: string; subtitle: string; clearAll: string; empty: string; remove: string };
+  notFound: { title: string; desc: string; backHome: string };
+  errorPage: { message: string };
+  offline: { title: string; desc: string };
+  language: { switchTo: string };
+}
+
+export const translations: Record<Lang, TranslationDict> = {
   ar: {
     common: { siteName: "شغلانة" },
     nav: { search: "بحث", favorites: "المفضلة", history: "السجل" },
@@ -175,6 +247,4 @@ export const translations = {
     offline: { title: "No internet connection", desc: "Looks like you're offline right now. Check your connection and try again." },
     language: { switchTo: "العربية" },
   },
-} as const;
-
-export type TranslationDict = typeof translations.ar;
+};
