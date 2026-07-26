@@ -1,17 +1,14 @@
 import { NextResponse } from "next/server";
 
-// 1. للتعامل مع طلبات البحث من الـ Frontend
+// رابط الـ Webhook بتاع n8n المباشر
+const DEFAULT_N8N_URL = "https://sho8lana.app.n8n.cloud/webhook/sho8lana-search";
+
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-        const webhookUrl = process.env.N8N_WEBHOOK_URL || process.env.NEXT_PUBLIC_API_URL;
 
-        if (!webhookUrl) {
-            return NextResponse.json(
-                { success: false, message: "Webhook URL is missing" },
-                { status: 500 }
-            );
-        }
+        // استخدام المتغير أو الرابط المباشر
+        const webhookUrl = process.env.N8N_WEBHOOK_URL || DEFAULT_N8N_URL;
 
         const response = await fetch(webhookUrl, {
             method: "POST",
@@ -21,9 +18,14 @@ export async function POST(request: Request) {
             body: JSON.stringify(body),
         });
 
+        if (!response.ok) {
+            throw new Error(`n8n responded with status: ${response.status}`);
+        }
+
         const data = await response.json();
-        return NextResponse.json(data, { status: response.status });
+        return NextResponse.json(data, { status: 200 });
     } catch (error: any) {
+        console.error("Proxy error:", error);
         return NextResponse.json(
             { success: false, message: error.message || "Proxy server error" },
             { status: 500 }
@@ -31,7 +33,6 @@ export async function POST(request: Request) {
     }
 }
 
-// 2. تجنب إيرور 405 عند الفتح المباشر في المتصفح
 export async function GET() {
     return NextResponse.json({
         status: "online",
