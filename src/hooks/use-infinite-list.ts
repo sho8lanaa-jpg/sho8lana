@@ -10,7 +10,7 @@ import { RESULTS_PAGE_SIZE } from "@/constants";
  */
 export function useInfiniteList<T>(items: T[]) {
   const [visibleCount, setVisibleCount] = useState(RESULTS_PAGE_SIZE);
-  const sentinelRef = useRef<HTMLDivElement | null>(null);
+  const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setVisibleCount(RESULTS_PAGE_SIZE);

@@ -27,7 +27,7 @@ export function Navbar() {
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-display font-bold text-lg">
           <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-accent shadow-glow">
-            <Briefcase className="h-4.5 w-4.5 text-white" />
+            <Briefcase className="h-[1.125rem] w-[1.125rem] text-white" />
           </span>
           <span>{SITE_NAME_AR}</span>
         </Link>

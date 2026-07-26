@@ -57,7 +57,7 @@ export function CompanyCard({ company, isFavorite, onToggleFavorite, index = 0 }
             aria-label={isFavorite ? "إزالة من المفضلة" : "إضافة للمفضلة"}
             className="shrink-0 rounded-lg p-2 text-white/40 transition-colors hover:bg-white/[0.06] hover:text-red-400"
           >
-            <Heart className={cn("h-4.5 w-4.5", isFavorite && "fill-red-500 text-red-500")} />
+            <Heart className={cn("h-[1.125rem] w-[1.125rem]", isFavorite && "fill-red-500 text-red-500")} />
           </button>
         </div>
 
