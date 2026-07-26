@@ -41,8 +41,23 @@ export async function searchCompanies(
   } catch (err) {
     if (err instanceof SearchServiceError) throw err;
 
-    const axiosErr = err as AxiosError<{ message?: string }>;
-    const serverMessage = axiosErr.response?.data?.message;
+    const axiosErr = err as AxiosError<Partial<SearchApiResponse> & { message?: string }>;
+
+    // لو السيرفر رجع response (حتى لو 400 أو 422)، وفيها بيانات مفيدة من الـ AI
+    if (axiosErr.response?.data) {
+      const resData = axiosErr.response.data;
+
+      // لو الـ response ناتج من رفض الـ AI للمسمى الوظيفي أو عدم وجود نتائج
+      if (resData.success === false || resData.message) {
+        return {
+          success: false,
+          cached: false,
+          count: 0,
+          results: [],
+          message: resData.message || "لم نجد نتائج مطابقة لهذا البحث.",
+        };
+      }
+    }
 
     if (axiosErr.code === "ECONNABORTED") {
       throw new SearchServiceError("البحث خد وقت طويل قوي. جرب تاني.", err);
@@ -50,7 +65,7 @@ export async function searchCompanies(
 
     if (axiosErr.response) {
       throw new SearchServiceError(
-        serverMessage ?? `حصل خطأ في السيرفر (${axiosErr.response.status}).`,
+        axiosErr.response.data?.message ?? `حصل خطأ في السيرفر (${axiosErr.response.status}).`,
         err
       );
     }

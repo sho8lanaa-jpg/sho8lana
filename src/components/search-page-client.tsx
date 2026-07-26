@@ -102,7 +102,9 @@ export function SearchPageClient() {
       )}
 
       {status === "empty" && (
-        <EmptyState description={t.search.noResultsFor(lastQuery.jobTitle, governorateLabel)} />
+        <EmptyState
+          description={error ?? t.search.noResultsFor(lastQuery.jobTitle, governorateLabel)}
+        />
       )}
 
       {status === "success" && (

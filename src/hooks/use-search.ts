@@ -22,8 +22,20 @@ export function useSearch() {
       const response = await searchCompanies({ jobTitle, governorate });
       const results = response.results ?? [];
 
+      // إذا كانت الاستجابة غير ناجحة من الـ AI أو النتائج فارغة
+      if (!response.success || results.length === 0) {
+        setState({
+          status: "empty",
+          results: [],
+          count: 0,
+          cached: response.cached ?? false,
+          error: response.message || null, // تمرير الرسالة الخاصة بالوظيفة
+        });
+        return;
+      }
+
       setState({
-        status: results.length > 0 ? "success" : "empty",
+        status: "success",
         results,
         count: response.count ?? results.length,
         cached: response.cached ?? false,
