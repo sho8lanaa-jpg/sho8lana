@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+// 1. للتعامل مع طلبات البحث من الـ Frontend
 export async function POST(request: Request) {
     try {
         const body = await request.json();
@@ -28,4 +29,12 @@ export async function POST(request: Request) {
             { status: 500 }
         );
     }
+}
+
+// 2. تجنب إيرور 405 عند الفتح المباشر في المتصفح
+export async function GET() {
+    return NextResponse.json({
+        status: "online",
+        message: "Sho8lana Search Proxy API is working properly!",
+    });
 }
