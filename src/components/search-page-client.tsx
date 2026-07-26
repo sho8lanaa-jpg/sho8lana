@@ -112,7 +112,7 @@ export function SearchPageClient() {
               <h2 className="font-display text-lg font-semibold">
                 {t.search.resultsFor} &quot;{lastQuery.jobTitle}&quot;
               </h2>
-              <p className="text-sm text-white/40">
+              <p className="text-sm text-foreground/40">
                 {governorateLabel} · {count} {t.filters.results}
                 {cached ? ` · ${t.search.cached}` : ""}
               </p>

@@ -20,7 +20,7 @@ export default function HistoryPage() {
             <History className="h-5 w-5 text-primary-400" />
             {t.history.title}
           </h1>
-          <p className="mt-1 text-sm text-white/40">{t.history.subtitle}</p>
+          <p className="mt-1 text-sm text-foreground/40">{t.history.subtitle}</p>
         </div>
         {history.length > 0 && (
           <Button variant="outline" size="sm" onClick={clearHistory}>

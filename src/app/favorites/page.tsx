@@ -18,7 +18,7 @@ export default function FavoritesPage() {
             <Heart className="h-5 w-5 text-red-500" />
             {t.favorites.title}
           </h1>
-          <p className="mt-1 text-sm text-white/40">{t.favorites.subtitle}</p>
+          <p className="mt-1 text-sm text-foreground/40">{t.favorites.subtitle}</p>
         </div>
         {favorites.length > 0 && (
           <Button variant="outline" size="sm" onClick={clearFavorites}>

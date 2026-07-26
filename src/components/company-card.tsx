@@ -44,7 +44,7 @@ export function CompanyCard({ company, isFavorite, onToggleFavorite, index = 0 }
                 {company.company_name}
               </h3>
               {company.rating !== null && (
-                <div className="mt-1 flex items-center gap-1 text-xs text-white/60">
+                <div className="mt-1 flex items-center gap-1 text-xs text-foreground/60">
                   <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
                   {formatRating(company.rating)}
                 </div>
@@ -57,7 +57,7 @@ export function CompanyCard({ company, isFavorite, onToggleFavorite, index = 0 }
             onClick={() => onToggleFavorite(company)}
             aria-pressed={isFavorite}
             aria-label={isFavorite ? t.companyCard.removeFavorite : t.companyCard.addFavorite}
-            className="shrink-0 rounded-lg p-2 text-white/40 transition-colors hover:bg-white/[0.06] hover:text-red-400"
+            className="shrink-0 rounded-lg p-2 text-foreground/40 transition-colors hover:bg-foreground/[0.06] hover:text-red-400"
           >
             <Heart className={cn("h-[1.125rem] w-[1.125rem]", isFavorite && "fill-red-500 text-red-500")} />
           </button>
@@ -66,9 +66,9 @@ export function CompanyCard({ company, isFavorite, onToggleFavorite, index = 0 }
         <button
           type="button"
           onClick={handleCopyAddress}
-          className="flex items-start gap-2 text-right text-sm text-white/60 transition-colors hover:text-white/80"
+          className="flex items-start gap-2 text-right text-sm text-foreground/60 transition-colors hover:text-foreground/80"
         >
-          <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-white/30" />
+          <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-foreground/30" />
           <span className="flex-1">{company.address}</span>
           <Copy className="mt-0.5 h-3.5 w-3.5 shrink-0 opacity-0 transition-opacity group-hover:opacity-60" />
         </button>

@@ -28,7 +28,7 @@ export function HomeContent() {
                 <Icon className="h-5 w-5" />
               </span>
               <h3 className="mt-4 font-display text-lg font-semibold">{title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/50">{description}</p>
+              <p className="mt-2 text-sm leading-relaxed text-foreground/50">{description}</p>
             </div>
           ))}
         </div>

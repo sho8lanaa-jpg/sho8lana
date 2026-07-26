@@ -22,14 +22,14 @@ export function Filters({ filters, onChange, resultCount }: FiltersProps) {
   ];
 
   return (
-    <div className="flex flex-wrap items-center gap-x-6 gap-y-3 rounded-2xl border border-border bg-white/[0.02] px-4 py-3 text-sm">
-      <div className="flex items-center gap-1.5 text-white/50">
+    <div className="flex flex-wrap items-center gap-x-6 gap-y-3 rounded-2xl border border-border bg-foreground/[0.02] px-4 py-3 text-sm">
+      <div className="flex items-center gap-1.5 text-foreground/50">
         <SlidersHorizontal className="h-4 w-4" />
         <span>{resultCount} {t.filters.results}</span>
       </div>
 
       <div className="flex items-center gap-2">
-        <span className="text-white/50">{t.filters.minRating}</span>
+        <span className="text-foreground/50">{t.filters.minRating}</span>
         <div className="flex gap-1">
           {RATING_OPTIONS.map((r) => (
             <button
@@ -38,7 +38,7 @@ export function Filters({ filters, onChange, resultCount }: FiltersProps) {
               className={`rounded-lg px-2.5 py-1 text-xs transition-colors ${
                 filters.minRating === r
                   ? "bg-primary text-white"
-                  : "bg-white/[0.04] text-white/60 hover:bg-white/[0.08]"
+                  : "bg-foreground/[0.04] text-foreground/60 hover:bg-foreground/[0.08]"
               }`}
             >
               {r === 0 ? t.filters.all : `${r}+`}
@@ -47,7 +47,7 @@ export function Filters({ filters, onChange, resultCount }: FiltersProps) {
         </div>
       </div>
 
-      <label className="flex cursor-pointer items-center gap-2 text-white/70">
+      <label className="flex cursor-pointer items-center gap-2 text-foreground/70">
         <Checkbox
           checked={filters.hasWebsite}
           onCheckedChange={(v) => onChange({ ...filters, hasWebsite: v === true })}
@@ -55,7 +55,7 @@ export function Filters({ filters, onChange, resultCount }: FiltersProps) {
         {t.filters.hasWebsite}
       </label>
 
-      <label className="flex cursor-pointer items-center gap-2 text-white/70">
+      <label className="flex cursor-pointer items-center gap-2 text-foreground/70">
         <Checkbox
           checked={filters.hasPhone}
           onCheckedChange={(v) => onChange({ ...filters, hasPhone: v === true })}
@@ -64,7 +64,7 @@ export function Filters({ filters, onChange, resultCount }: FiltersProps) {
       </label>
 
       <div className="flex items-center gap-2 sm:mr-auto">
-        <span className="text-white/50">{t.filters.sortBy}</span>
+        <span className="text-foreground/50">{t.filters.sortBy}</span>
         <div className="flex gap-1">
           {sortOptions.map((opt) => (
             <button
@@ -73,7 +73,7 @@ export function Filters({ filters, onChange, resultCount }: FiltersProps) {
               className={`rounded-lg px-2.5 py-1 text-xs transition-colors ${
                 filters.sortBy === opt.value
                   ? "bg-primary text-white"
-                  : "bg-white/[0.04] text-white/60 hover:bg-white/[0.08]"
+                  : "bg-foreground/[0.04] text-foreground/60 hover:bg-foreground/[0.08]"
               }`}
             >
               {opt.label}

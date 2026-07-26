@@ -26,7 +26,7 @@ export function ErrorState({ message, onRetry }: ErrorStateProps) {
       </span>
       <div>
         <h3 className="font-display text-lg font-semibold">{t.errorState.title}</h3>
-        <p className="mt-1 max-w-sm text-sm text-white/50">{message ?? t.errorState.defaultMessage}</p>
+        <p className="mt-1 max-w-sm text-sm text-foreground/50">{message ?? t.errorState.defaultMessage}</p>
       </div>
       {onRetry && (
         <Button variant="default" onClick={onRetry}>

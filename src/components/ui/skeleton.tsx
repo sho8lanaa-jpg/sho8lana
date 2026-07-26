@@ -5,7 +5,7 @@ export function Skeleton({ className, ...props }: HTMLAttributes<HTMLDivElement>
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-xl bg-white/[0.05] bg-[length:200%_100%] bg-gradient-to-r from-white/[0.05] via-white/[0.1] to-white/[0.05] animate-shimmer",
+        "relative overflow-hidden rounded-xl bg-foreground/[0.05] bg-[length:200%_100%] bg-gradient-to-r from-foreground/[0.05] via-foreground/[0.1] to-foreground/[0.05] animate-shimmer",
         className
       )}
       {...props}

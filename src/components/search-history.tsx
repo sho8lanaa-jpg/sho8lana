@@ -18,7 +18,7 @@ export function SearchHistoryList({ history, onSelect, onRemove }: SearchHistory
 
   if (history.length === 0) {
     return (
-      <p className="rounded-2xl border border-dashed border-border py-12 text-center text-sm text-white/40">
+      <p className="rounded-2xl border border-dashed border-border py-12 text-center text-sm text-foreground/40">
         {t.history.empty}
       </p>
     );
@@ -39,12 +39,12 @@ export function SearchHistoryList({ history, onSelect, onRemove }: SearchHistory
               onClick={() => onSelect(item)}
               className="flex flex-1 items-center gap-3 text-right"
             >
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/[0.04] text-white/40">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-foreground/[0.04] text-foreground/40">
                 <Clock className="h-4 w-4" />
               </span>
               <span>
                 <span className="block text-sm font-medium">{item.jobTitle}</span>
-                <span className="mt-0.5 flex items-center gap-1 text-xs text-white/40">
+                <span className="mt-0.5 flex items-center gap-1 text-xs text-foreground/40">
                   <MapPin className="h-3 w-3" />
                   {getGovernorateLabel(item.governorate, lang)}
                 </span>
@@ -54,7 +54,7 @@ export function SearchHistoryList({ history, onSelect, onRemove }: SearchHistory
               type="button"
               onClick={() => onRemove(item.id)}
               aria-label={t.history.remove}
-              className="rounded-lg p-1.5 text-white/30 opacity-0 transition-opacity hover:bg-white/[0.06] hover:text-white group-hover:opacity-100"
+              className="rounded-lg p-1.5 text-foreground/30 opacity-0 transition-opacity hover:bg-foreground/[0.06] hover:text-foreground group-hover:opacity-100"
             >
               <X className="h-4 w-4" />
             </button>

@@ -18,8 +18,8 @@ const config: Config = {
         display: ["var(--font-cairo)", "system-ui", "sans-serif"],
       },
       colors: {
-        background: "#0B1120",
-        foreground: "#FFFFFF",
+        background: "hsl(var(--background) / <alpha-value>)",
+        foreground: "hsl(var(--foreground) / <alpha-value>)",
         primary: {
           DEFAULT: "#2563EB",
           foreground: "#FFFFFF",
@@ -34,13 +34,13 @@ const config: Config = {
           foreground: "#052E33",
         },
         card: {
-          DEFAULT: "rgba(255,255,255,0.04)",
-          hover: "rgba(255,255,255,0.07)",
+          DEFAULT: "hsl(var(--foreground) / 0.045)",
+          hover: "hsl(var(--foreground) / 0.075)",
         },
-        border: "rgba(255,255,255,0.08)",
+        border: "hsl(var(--foreground) / 0.08)",
         muted: {
-          DEFAULT: "rgba(255,255,255,0.06)",
-          foreground: "rgba(255,255,255,0.6)",
+          DEFAULT: "hsl(var(--foreground) / 0.06)",
+          foreground: "hsl(var(--foreground) / 0.5)",
         },
         destructive: {
           DEFAULT: "#EF4444",

@@ -24,7 +24,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="rounded-full border border-border bg-white/[0.04] px-4 py-1.5 text-xs font-medium text-white/60"
+          className="rounded-full border border-border bg-foreground/[0.04] px-4 py-1.5 text-xs font-medium text-foreground/60"
         >
           {t.hero.badge}
         </motion.span>
@@ -45,7 +45,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="max-w-xl text-balance text-base text-white/60 sm:text-lg"
+          className="max-w-xl text-balance text-base text-foreground/60 sm:text-lg"
         >
           {t.hero.subtitle}
         </motion.p>

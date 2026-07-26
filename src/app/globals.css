@@ -3,6 +3,18 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* Light mode */
+    --background: 210 40% 98%;
+    --foreground: 223 49% 8%;
+  }
+
+  .dark {
+    /* Dark mode (original design) */
+    --background: 223 49% 8%;
+    --foreground: 0 0% 100%;
+  }
+
   * {
     @apply border-border;
   }
@@ -12,12 +24,12 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased transition-colors duration-200;
     font-feature-settings: "ss01";
   }
 
   ::selection {
-    @apply bg-primary/30 text-white;
+    @apply bg-primary/30 text-foreground;
   }
 
   :focus-visible {

@@ -89,7 +89,7 @@ export function SearchForm({ defaultValues, loading, onSearch }: SearchFormProps
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -6 }}
                 transition={{ duration: 0.15 }}
-                className="absolute z-20 mt-1.5 w-full overflow-hidden rounded-xl border border-border bg-[#0F172A]/95 backdrop-blur-xl shadow-card"
+                className="absolute z-20 mt-1.5 w-full overflow-hidden rounded-xl border border-border bg-background/95 backdrop-blur-xl shadow-card"
               >
                 {matches.map((title) => (
                   <li key={title}>
@@ -97,7 +97,7 @@ export function SearchForm({ defaultValues, loading, onSearch }: SearchFormProps
                       type="button"
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={() => selectJobTitle(title)}
-                      className="flex w-full items-center px-4 py-2.5 text-right text-sm text-white/80 transition-colors hover:bg-white/[0.08]"
+                      className="flex w-full items-center px-4 py-2.5 text-right text-sm text-foreground/80 transition-colors hover:bg-foreground/[0.08]"
                     >
                       {title}
                     </button>
@@ -140,13 +140,13 @@ export function SearchForm({ defaultValues, loading, onSearch }: SearchFormProps
       )}
 
       <div className="mt-3 flex flex-wrap items-center gap-2 px-1">
-        <Sparkles className="h-3.5 w-3.5 text-white/30" />
+        <Sparkles className="h-3.5 w-3.5 text-foreground/30" />
         {quickSuggestions.map((title) => (
           <button
             type="button"
             key={title}
             onClick={() => selectJobTitle(title)}
-            className="rounded-full border border-border bg-white/[0.03] px-3 py-1 text-xs text-white/60 transition-colors hover:bg-white/[0.08] hover:text-white"
+            className="rounded-full border border-border bg-foreground/[0.03] px-3 py-1 text-xs text-foreground/60 transition-colors hover:bg-foreground/[0.08] hover:text-foreground"
           >
             {title}
           </button>

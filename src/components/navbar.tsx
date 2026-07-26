@@ -44,8 +44,8 @@ export function Navbar() {
                 className={cn(
                   "flex items-center gap-1.5 rounded-xl px-4 py-2 text-sm font-medium transition-colors",
                   active
-                    ? "bg-white/[0.08] text-white"
-                    : "text-white/60 hover:text-white hover:bg-white/[0.05]"
+                    ? "bg-foreground/[0.08] text-foreground"
+                    : "text-foreground/60 hover:text-foreground hover:bg-foreground/[0.05]"
                 )}
                 aria-current={active ? "page" : undefined}
               >
@@ -74,7 +74,7 @@ export function Navbar() {
               href={href}
               className={cn(
                 "flex flex-1 flex-col items-center gap-1 py-2.5 text-xs font-medium transition-colors",
-                active ? "text-primary-400" : "text-white/50"
+                active ? "text-primary-400" : "text-foreground/50"
               )}
               aria-current={active ? "page" : undefined}
             >
