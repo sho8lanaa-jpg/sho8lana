@@ -3,10 +3,12 @@
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { SearchForm } from "@/components/search-form";
+import { useLanguage } from "@/lib/i18n/language-provider";
 import type { SearchFormValues } from "@/lib/schemas";
 
 export function Hero() {
   const router = useRouter();
+  const { t } = useLanguage();
 
   function handleSearch(values: SearchFormValues) {
     const params = new URLSearchParams({ job: values.jobTitle, gov: values.governorate });
@@ -24,7 +26,7 @@ export function Hero() {
           transition={{ duration: 0.4 }}
           className="rounded-full border border-border bg-white/[0.04] px-4 py-1.5 text-xs font-medium text-white/60"
         >
-          آلاف الشركات بتوظف دلوقتي في مصر
+          {t.hero.badge}
         </motion.span>
 
         <motion.h1
@@ -33,9 +35,9 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.05 }}
           className="max-w-3xl font-display text-4xl font-extrabold leading-[1.15] tracking-tight sm:text-6xl"
         >
-          ابحث عن شغلك{" "}
+          {t.hero.titlePrefix}{" "}
           <span className="bg-gradient-to-l from-primary-400 to-accent bg-clip-text text-transparent">
-            في ثواني
+            {t.hero.titleHighlight}
           </span>
         </motion.h1>
 
@@ -45,7 +47,7 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="max-w-xl text-balance text-base text-white/60 sm:text-lg"
         >
-          اكتب المسمى الوظيفي والمحافظة وسنعرض لك الشركات المناسبة القريبة منك.
+          {t.hero.subtitle}
         </motion.p>
 
         <div className="w-full max-w-2xl">

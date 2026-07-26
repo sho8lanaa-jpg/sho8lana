@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { readStorage, writeStorage } from "@/utils/storage";
 import { MAX_HISTORY_ITEMS, STORAGE_KEYS } from "@/constants";
-import { getGovernorateLabel } from "@/lib/governorates";
 import type { SearchHistoryItem } from "@/types";
 
 export function useSearchHistory() {
@@ -26,7 +25,6 @@ export function useSearchHistory() {
         id: `${governorate}-${jobTitle}-${Date.now()}`,
         jobTitle,
         governorate,
-        governorateLabel: getGovernorateLabel(governorate),
         timestamp: Date.now(),
       };
 

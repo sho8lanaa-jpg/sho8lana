@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { Cairo } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
+import { LanguageProvider } from "@/lib/i18n/language-provider";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Toaster } from "sonner";
@@ -60,12 +61,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="ar" dir="rtl" className={cairo.variable} suppressHydrationWarning>
       <body className="min-h-screen font-sans">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          <div className="flex min-h-screen flex-col">
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
-          <Toaster theme="dark" position="top-center" richColors />
+          <LanguageProvider>
+            <div className="flex min-h-screen flex-col">
+              <Navbar />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
+            <Toaster theme="dark" position="top-center" richColors />
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

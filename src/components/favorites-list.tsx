@@ -2,6 +2,7 @@
 
 import { CompanyCard } from "@/components/company-card";
 import { EmptyState } from "@/components/empty-state";
+import { useLanguage } from "@/lib/i18n/language-provider";
 import type { FavoriteCompany } from "@/types";
 
 interface FavoritesListProps {
@@ -10,13 +11,10 @@ interface FavoritesListProps {
 }
 
 export function FavoritesList({ favorites, onToggleFavorite }: FavoritesListProps) {
+  const { t } = useLanguage();
+
   if (favorites.length === 0) {
-    return (
-      <EmptyState
-        title="مفيش شركات في المفضلة"
-        description="اضغط على أيقونة القلب في أي نتيجة بحث عشان تحفظها هنا."
-      />
-    );
+    return <EmptyState title={t.favorites.emptyTitle} description={t.favorites.emptyDesc} />;
   }
 
   return (

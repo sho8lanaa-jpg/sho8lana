@@ -38,7 +38,6 @@ export interface SearchHistoryItem {
   id: string;
   jobTitle: string;
   governorate: string;
-  governorateLabel: string;
   timestamp: number;
 }
 
@@ -49,7 +48,8 @@ export interface FavoriteCompany extends Company {
 
 export interface Governorate {
   value: string;
-  label: string;
+  ar: string;
+  en: string;
 }
 
 export type SortOption = "rating" | "alphabetical";

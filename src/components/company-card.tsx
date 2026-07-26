@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn, formatRating, normalizePhone } from "@/lib/utils";
 import { copyToClipboard } from "@/utils/share";
+import { useLanguage } from "@/lib/i18n/language-provider";
 import { toast } from "sonner";
 import type { Company } from "@/types";
 
@@ -17,11 +18,12 @@ interface CompanyCardProps {
 }
 
 export function CompanyCard({ company, isFavorite, onToggleFavorite, index = 0 }: CompanyCardProps) {
+  const { t } = useLanguage();
   const phone = normalizePhone(company.phone);
 
   async function handleCopyAddress() {
     const ok = await copyToClipboard(company.address);
-    toast(ok ? "تم نسخ العنوان" : "تعذر نسخ العنوان");
+    toast(ok ? t.companyCard.addressCopied : t.companyCard.addressCopyFailed);
   }
 
   return (
@@ -54,7 +56,7 @@ export function CompanyCard({ company, isFavorite, onToggleFavorite, index = 0 }
             type="button"
             onClick={() => onToggleFavorite(company)}
             aria-pressed={isFavorite}
-            aria-label={isFavorite ? "إزالة من المفضلة" : "إضافة للمفضلة"}
+            aria-label={isFavorite ? t.companyCard.removeFavorite : t.companyCard.addFavorite}
             className="shrink-0 rounded-lg p-2 text-white/40 transition-colors hover:bg-white/[0.06] hover:text-red-400"
           >
             <Heart className={cn("h-[1.125rem] w-[1.125rem]", isFavorite && "fill-red-500 text-red-500")} />
@@ -74,9 +76,9 @@ export function CompanyCard({ company, isFavorite, onToggleFavorite, index = 0 }
         <div className="mt-auto flex flex-wrap gap-2 pt-1">
           {phone && (
             <Button variant="outline" size="sm" asChild>
-              <a href={`tel:${phone}`} aria-label={`اتصل بـ ${company.company_name}`}>
+              <a href={`tel:${phone}`} aria-label={`${t.companyCard.call} ${company.company_name}`}>
                 <Phone className="h-3.5 w-3.5" />
-                اتصال
+                {t.companyCard.call}
               </a>
             </Button>
           )}
@@ -84,14 +86,14 @@ export function CompanyCard({ company, isFavorite, onToggleFavorite, index = 0 }
             <Button variant="outline" size="sm" asChild>
               <a href={company.website} target="_blank" rel="noopener noreferrer">
                 <Globe className="h-3.5 w-3.5" />
-                الموقع
+                {t.companyCard.website}
               </a>
             </Button>
           )}
           <Button variant="default" size="sm" asChild>
             <a href={company.maps_url} target="_blank" rel="noopener noreferrer">
               <Navigation className="h-3.5 w-3.5" />
-              الاتجاهات
+              {t.companyCard.directions}
             </a>
           </Button>
         </div>

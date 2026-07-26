@@ -15,6 +15,7 @@ import { useSearch } from "@/hooks/use-search";
 import { useFavorites } from "@/hooks/use-favorites";
 import { useSearchHistory } from "@/hooks/use-search-history";
 import { useInfiniteList } from "@/hooks/use-infinite-list";
+import { useLanguage } from "@/lib/i18n/language-provider";
 import { getGovernorateLabel } from "@/lib/governorates";
 import { DEFAULT_FILTERS } from "@/constants";
 import type { SearchFilters } from "@/types";
@@ -23,6 +24,7 @@ import type { SearchFormValues } from "@/lib/schemas";
 export function SearchPageClient() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { t, lang } = useLanguage();
 
   const initialJobTitle = searchParams.get("job") ?? "";
   const initialGovernorate = searchParams.get("gov") ?? "";
@@ -64,15 +66,16 @@ export function SearchPageClient() {
 
     list = [...list].sort((a, b) => {
       if (filters.sortBy === "alphabetical") {
-        return a.company_name.localeCompare(b.company_name, "ar");
+        return a.company_name.localeCompare(b.company_name, lang === "ar" ? "ar" : "en");
       }
       return (b.rating ?? 0) - (a.rating ?? 0);
     });
 
     return list;
-  }, [results, filters]);
+  }, [results, filters, lang]);
 
   const { visibleItems, hasMore, sentinelRef } = useInfiniteList(filteredResults);
+  const governorateLabel = getGovernorateLabel(lastQuery.governorate, lang);
 
   return (
     <div className="container py-10 sm:py-14">
@@ -99,11 +102,7 @@ export function SearchPageClient() {
       )}
 
       {status === "empty" && (
-        <EmptyState
-          description={`مفيش شركات لـ "${lastQuery.jobTitle}" في ${getGovernorateLabel(
-            lastQuery.governorate
-          )} دلوقتي. جرب مسمى وظيفي تاني.`}
-        />
+        <EmptyState description={t.search.noResultsFor(lastQuery.jobTitle, governorateLabel)} />
       )}
 
       {status === "success" && (
@@ -111,11 +110,11 @@ export function SearchPageClient() {
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <h2 className="font-display text-lg font-semibold">
-                نتائج البحث عن &quot;{lastQuery.jobTitle}&quot;
+                {t.search.resultsFor} &quot;{lastQuery.jobTitle}&quot;
               </h2>
               <p className="text-sm text-white/40">
-                {getGovernorateLabel(lastQuery.governorate)} · {count} نتيجة
-                {cached ? " · من الكاش" : ""}
+                {governorateLabel} · {count} {t.filters.results}
+                {cached ? ` · ${t.search.cached}` : ""}
               </p>
             </div>
             <ShareSearchButton jobTitle={lastQuery.jobTitle} governorate={lastQuery.governorate} />
@@ -124,10 +123,7 @@ export function SearchPageClient() {
           <Filters filters={filters} onChange={setFilters} resultCount={filteredResults.length} />
 
           {filteredResults.length === 0 ? (
-            <EmptyState
-              title="مفيش نتائج مطابقة للفلاتر"
-              description="جرب تشيل بعض الفلاتر عشان تشوف نتائج أكتر."
-            />
+            <EmptyState title={t.emptyState.noFilterTitle} description={t.emptyState.noFilterDesc} />
           ) : (
             <>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -148,10 +144,7 @@ export function SearchPageClient() {
       )}
 
       {status === "idle" && (
-        <EmptyState
-          title="ابدأ بحثك الأول"
-          description="اكتب المسمى الوظيفي واختار المحافظة عشان نعرضلك الشركات المناسبة."
-        />
+        <EmptyState title={t.emptyState.startTitle} description={t.emptyState.startDesc} />
       )}
     </div>
   );

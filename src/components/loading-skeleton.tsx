@@ -3,14 +3,17 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useLanguage } from "@/lib/i18n/language-provider";
 
 export function LoadingSkeleton({ count = 6 }: { count?: number }) {
+  const { t } = useLanguage();
+
   return (
     <div
       className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
       role="status"
       aria-live="polite"
-      aria-label="جاري تحميل النتائج"
+      aria-label={t.loading.ariaLabel}
     >
       {Array.from({ length: count }).map((_, i) => (
         <motion.div
@@ -37,7 +40,7 @@ export function LoadingSkeleton({ count = 6 }: { count?: number }) {
           </Card>
         </motion.div>
       ))}
-      <span className="sr-only">جاري البحث عن الشركات المناسبة…</span>
+      <span className="sr-only">{t.loading.searching}</span>
     </div>
   );
 }

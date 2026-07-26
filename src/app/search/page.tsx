@@ -4,8 +4,8 @@ import { SearchPageClient } from "@/components/search-page-client";
 import { LoadingSkeleton } from "@/components/loading-skeleton";
 
 export const metadata: Metadata = {
-  title: "نتائج البحث",
-  description: "شركات بتوظف قريبة منك حسب المسمى الوظيفي والمحافظة.",
+  title: "نتائج البحث | Search Results",
+  description: "شركات بتوظف قريبة منك حسب المسمى الوظيفي والمحافظة. | Companies hiring near you.",
 };
 
 export default function SearchPage() {

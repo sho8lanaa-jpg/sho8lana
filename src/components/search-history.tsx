@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { Clock, MapPin, X } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { getGovernorateLabel } from "@/lib/governorates";
+import { useLanguage } from "@/lib/i18n/language-provider";
 import type { SearchHistoryItem } from "@/types";
 
 interface SearchHistoryListProps {
@@ -12,10 +14,12 @@ interface SearchHistoryListProps {
 }
 
 export function SearchHistoryList({ history, onSelect, onRemove }: SearchHistoryListProps) {
+  const { t, lang } = useLanguage();
+
   if (history.length === 0) {
     return (
       <p className="rounded-2xl border border-dashed border-border py-12 text-center text-sm text-white/40">
-        لسه معملتش أي بحث. اعمل أول بحث وهيتسجل هنا.
+        {t.history.empty}
       </p>
     );
   }
@@ -42,14 +46,14 @@ export function SearchHistoryList({ history, onSelect, onRemove }: SearchHistory
                 <span className="block text-sm font-medium">{item.jobTitle}</span>
                 <span className="mt-0.5 flex items-center gap-1 text-xs text-white/40">
                   <MapPin className="h-3 w-3" />
-                  {item.governorateLabel}
+                  {getGovernorateLabel(item.governorate, lang)}
                 </span>
               </span>
             </button>
             <button
               type="button"
               onClick={() => onRemove(item.id)}
-              aria-label="حذف من السجل"
+              aria-label={t.history.remove}
               className="rounded-lg p-1.5 text-white/30 opacity-0 transition-opacity hover:bg-white/[0.06] hover:text-white group-hover:opacity-100"
             >
               <X className="h-4 w-4" />

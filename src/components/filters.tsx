@@ -2,6 +2,7 @@
 
 import { SlidersHorizontal } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useLanguage } from "@/lib/i18n/language-provider";
 import type { SearchFilters, SortOption } from "@/types";
 
 interface FiltersProps {
@@ -11,21 +12,24 @@ interface FiltersProps {
 }
 
 const RATING_OPTIONS = [0, 3, 4, 4.5];
-const SORT_OPTIONS: { value: SortOption; label: string }[] = [
-  { value: "rating", label: "الأعلى تقييمًا" },
-  { value: "alphabetical", label: "أبجديًا" },
-];
 
 export function Filters({ filters, onChange, resultCount }: FiltersProps) {
+  const { t } = useLanguage();
+
+  const sortOptions: { value: SortOption; label: string }[] = [
+    { value: "rating", label: t.filters.sortRating },
+    { value: "alphabetical", label: t.filters.sortAlphabetical },
+  ];
+
   return (
     <div className="flex flex-wrap items-center gap-x-6 gap-y-3 rounded-2xl border border-border bg-white/[0.02] px-4 py-3 text-sm">
       <div className="flex items-center gap-1.5 text-white/50">
         <SlidersHorizontal className="h-4 w-4" />
-        <span>{resultCount} نتيجة</span>
+        <span>{resultCount} {t.filters.results}</span>
       </div>
 
       <div className="flex items-center gap-2">
-        <span className="text-white/50">الحد الأدنى للتقييم</span>
+        <span className="text-white/50">{t.filters.minRating}</span>
         <div className="flex gap-1">
           {RATING_OPTIONS.map((r) => (
             <button
@@ -37,7 +41,7 @@ export function Filters({ filters, onChange, resultCount }: FiltersProps) {
                   : "bg-white/[0.04] text-white/60 hover:bg-white/[0.08]"
               }`}
             >
-              {r === 0 ? "الكل" : `${r}+`}
+              {r === 0 ? t.filters.all : `${r}+`}
             </button>
           ))}
         </div>
@@ -48,7 +52,7 @@ export function Filters({ filters, onChange, resultCount }: FiltersProps) {
           checked={filters.hasWebsite}
           onCheckedChange={(v) => onChange({ ...filters, hasWebsite: v === true })}
         />
-        عندها موقع
+        {t.filters.hasWebsite}
       </label>
 
       <label className="flex cursor-pointer items-center gap-2 text-white/70">
@@ -56,13 +60,13 @@ export function Filters({ filters, onChange, resultCount }: FiltersProps) {
           checked={filters.hasPhone}
           onCheckedChange={(v) => onChange({ ...filters, hasPhone: v === true })}
         />
-        عندها تليفون
+        {t.filters.hasPhone}
       </label>
 
       <div className="flex items-center gap-2 sm:mr-auto">
-        <span className="text-white/50">ترتيب حسب</span>
+        <span className="text-white/50">{t.filters.sortBy}</span>
         <div className="flex gap-1">
-          {SORT_OPTIONS.map((opt) => (
+          {sortOptions.map((opt) => (
             <button
               key={opt.value}
               onClick={() => onChange({ ...filters, sortBy: opt.value })}

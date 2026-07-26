@@ -5,17 +5,19 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Briefcase, Heart, History } from "lucide-react";
 import { ThemeSwitcher } from "@/components/theme-switcher";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import { useLanguage } from "@/lib/i18n/language-provider";
 import { cn } from "@/lib/utils";
-import { SITE_NAME_AR } from "@/constants";
-
-const links = [
-  { href: "/search", label: "بحث", icon: Briefcase },
-  { href: "/favorites", label: "المفضلة", icon: Heart },
-  { href: "/history", label: "السجل", icon: History },
-];
 
 export function Navbar() {
   const pathname = usePathname();
+  const { t } = useLanguage();
+
+  const links = [
+    { href: "/search", label: t.nav.search, icon: Briefcase },
+    { href: "/favorites", label: t.nav.favorites, icon: Heart },
+    { href: "/history", label: t.nav.history, icon: History },
+  ];
 
   return (
     <motion.header
@@ -29,10 +31,10 @@ export function Navbar() {
           <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-accent shadow-glow">
             <Briefcase className="h-[1.125rem] w-[1.125rem] text-white" />
           </span>
-          <span>{SITE_NAME_AR}</span>
+          <span>{t.common.siteName}</span>
         </Link>
 
-        <nav className="hidden items-center gap-1 sm:flex" aria-label="التنقل الرئيسي">
+        <nav className="hidden items-center gap-1 sm:flex" aria-label={t.nav.search}>
           {links.map(({ href, label, icon: Icon }) => {
             const active = pathname === href;
             return (
@@ -54,14 +56,15 @@ export function Navbar() {
           })}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
+          <LanguageSwitcher />
           <ThemeSwitcher />
         </div>
       </div>
 
       <nav
         className="flex items-center justify-around border-t border-border sm:hidden"
-        aria-label="التنقل الرئيسي للموبايل"
+        aria-label={t.nav.search}
       >
         {links.map(({ href, label, icon: Icon }) => {
           const active = pathname === href;

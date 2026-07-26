@@ -3,16 +3,16 @@
 import { motion } from "framer-motion";
 import { AlertTriangle, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/lib/i18n/language-provider";
 
 interface ErrorStateProps {
   message?: string;
   onRetry?: () => void;
 }
 
-export function ErrorState({
-  message = "حصل خطأ أثناء البحث. من فضلك حاول تاني.",
-  onRetry,
-}: ErrorStateProps) {
+export function ErrorState({ message, onRetry }: ErrorStateProps) {
+  const { t } = useLanguage();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -25,13 +25,13 @@ export function ErrorState({
         <AlertTriangle className="h-8 w-8" />
       </span>
       <div>
-        <h3 className="font-display text-lg font-semibold">حصل خطأ ما</h3>
-        <p className="mt-1 max-w-sm text-sm text-white/50">{message}</p>
+        <h3 className="font-display text-lg font-semibold">{t.errorState.title}</h3>
+        <p className="mt-1 max-w-sm text-sm text-white/50">{message ?? t.errorState.defaultMessage}</p>
       </div>
       {onRetry && (
         <Button variant="default" onClick={onRetry}>
           <RotateCcw className="h-4 w-4" />
-          حاول تاني
+          {t.errorState.retry}
         </Button>
       )}
     </motion.div>

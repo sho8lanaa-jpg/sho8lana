@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { SearchX } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/lib/i18n/language-provider";
 
 interface EmptyStateProps {
   title?: string;
@@ -10,11 +11,9 @@ interface EmptyStateProps {
   onRetry?: () => void;
 }
 
-export function EmptyState({
-  title = "لم يتم العثور على نتائج",
-  description = "جرب تغيّر المسمى الوظيفي أو تختار محافظة تانية.",
-  onRetry,
-}: EmptyStateProps) {
+export function EmptyState({ title, description, onRetry }: EmptyStateProps) {
+  const { t } = useLanguage();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -30,12 +29,12 @@ export function EmptyState({
         <SearchX className="h-8 w-8" />
       </motion.span>
       <div>
-        <h3 className="font-display text-lg font-semibold">{title}</h3>
-        <p className="mt-1 max-w-sm text-sm text-white/50">{description}</p>
+        <h3 className="font-display text-lg font-semibold">{title ?? t.emptyState.defaultTitle}</h3>
+        <p className="mt-1 max-w-sm text-sm text-white/50">{description ?? t.emptyState.defaultDesc}</p>
       </div>
       {onRetry && (
         <Button variant="outline" onClick={onRetry}>
-          جرب بحث تاني
+          {t.emptyState.retry}
         </Button>
       )}
     </motion.div>
