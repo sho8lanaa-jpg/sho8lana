@@ -11,7 +11,7 @@ interface EmptyStateProps {
   onRetry?: () => void;
 }
 
-export function EmptyState({ title, description, onRetry }: EmptyStateProps) {
+export function EmptyState({ title, onRetry }: EmptyStateProps) {
   const { t } = useLanguage();
 
   return (
@@ -29,8 +29,10 @@ export function EmptyState({ title, description, onRetry }: EmptyStateProps) {
         <SearchX className="h-8 w-8" />
       </motion.span>
       <div>
-        <h3 className="font-display text-lg font-semibold">{title ?? t.emptyState.defaultTitle}</h3>
-        <p className="mt-1 max-w-sm text-sm text-foreground/50">{description ?? t.emptyState.defaultDesc}</p>
+        <h3 className="font-display text-lg font-semibold">
+          {title ?? t.emptyState.defaultTitle}
+        </h3>
+        {/* شيلنا الـ description خالص عشان مفيش أي سطر إيرور يظهر للمستخدم */}
       </div>
       {onRetry && (
         <Button variant="outline" onClick={onRetry}>
